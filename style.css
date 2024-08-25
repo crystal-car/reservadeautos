@@ -1,0 +1,39 @@
+body {
+    background: linear-gradient(to right, #1f4037, #99f2c8);
+    color: #333;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.btn-primary {
+    background-color: #1f4037;
+    border: none;
+    border-radius: 25px;
+}
+
+.btn-primary:hover {
+    background-color: #1a3b2a;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.text-primary {
+    color: #1f4037 !important;
+}
+
+.text-secondary {
+    color: #555 !important;
+}

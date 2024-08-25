@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Autos - Reserva de Autos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesreserva.css"> 
+    <style>
+        .car-details {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .car-details img {
+            max-width: 150px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .car-details .details {
+            max-width: 400px;
+        }
+        .summary {
+            display: none;
+            margin-top: 20px;
+        }
+        .summary-content {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .reservation-summary {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .summary-card {
+            width: 100%;
+            max-width: 400px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark top-menu mb-5">
+        <div class="container">
+            <a class="navbar-brand">
+              <img src="IMG-20240807-WA0020(1).jpg" alt="Logo" class="navbar-logo rounded-circle" height="80px"> 
+                Crystal Car
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topMenuNav" aria-controls="topMenuNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topMenuNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="servicio.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactos.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-start vh-100">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4">Reserva de Autos</h3>
+                        <form id="reservationForm">
+                            <div class="form-group">
+                                <label for="carType">Tipo de Auto</label>
+                                <select class="form-control" id="carType" required>
+                                    <option value="">Selecciona el tipo de auto</option>
+                                    <option value="auto1">Auto 1</option>
+                                    <option value="auto2">Auto 2</option>
+                                    <option value="auto3">Auto 3</option>
+                                    <option value="auto4">Auto 4</option>
+                                    <option value="auto5">Auto 5</option>
+                                    <option value="auto6">Auto 6</option>
+                                </select>
+                            </div>
+                            <div id="carDetails" class="car-details">
+                                <!-- Aquí se mostrarán los detalles del auto seleccionado -->
+                                <img id="carImage" src="" alt="Foto del auto" style="display: none;">
+                                <div class="details">
+                                    <p id="carDescription"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pickupDate">Fecha de Recogida</label>
+                                <input type="date" class="form-control" id="pickupDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="returnDate">Fecha de Devolución</label>
+                                <input type="date" class="form-control" id="returnDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Nombre Completo</label>
+                                <input type="text" class="form-control" id="name" placeholder="Introduce tu nombre completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" placeholder="Introduce tu correo electrónico" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Introduce tu número de teléfono" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Reservar Auto</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 reservation-summary">
+                <div id="summary" class="summary summary-card">
+                    <h4 class="text-center">Resumen de la Reserva</h4>
+                    <div class="summary-content">
+                        <p><strong>Tipo de Auto:</strong> <span id="summaryCarType"></span></p>
+                        <p><strong>Fecha de Recogida:</strong> <span id="summaryPickupDate"></span></p>
+                        <p><strong>Fecha de Devolución:</strong> <span id="summaryReturnDate"></span></p>
+                        <p><strong>Nombre Completo:</strong> <span id="summaryName"></span></p>
+                        <p><strong>Correo Electrónico:</strong> <span id="summaryEmail"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="summaryPhone"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const carData = {
+            auto1: {
+                image: 'https://th.bing.com/th/id/R.ef52d6cf0c2471407623ea9fe0f431dd?rik=1CTGu8WiQ4px9Q&riu=http%3a%2f%2fphotos.prnewswire.com%2fprnfull%2f20160113%2f322063%3fmax%3d800&ehk=Nh2oMre9pZvk%2bP9VgzHIuPOcQkDs%2bcViFtgYB3PcIlk%3d&risl=&pid=ImgRaw&r=0',
+                description: 'Camioneta Kia Sportage Automatica, Año 2023, 4 Puertas AZUL MARINO.'
+            },
+            auto2: {
+                image: 'https://th.bing.com/th/id/OIP.yj9CdnX3x287L8DUoT334AHaEo?rs=1&pid=ImgDetMain',
+                description: 'Sedan Honda Civic Año 2016, Automático, 4 Puertas, Color Gris.'
+            },
+            auto3: {
+                image: 'https://th.bing.com/th/id/OIP.ve42B41ISozYM2PDFKMdpAAAAA?rs=1&pid=ImgDetMain',
+                description: 'Sedan Ford, Año 2016, Automático 4 puertas, Color Rojo.'
+            },
+            auto4: {
+                image: 'https://static.emol.cl/emol50/Fotos/2016/11/10/file_20161110171315.jpg',
+                description: 'Pick-Up Ford, Año 2021, Automático Doble Cabina 4 puertas, Color Rojo.'
+            },
+            auto5: {
+                image: 'https://www.chevrolet.com.mx/content/dam/chevrolet/na/mx/es/index/cars/2020-aveo/colorizer/01-images/plata-galaxia.jpg?imwidth=1200',
+                description: 'Pick-Up Mitsubishi Año 2022 Automático, Doble Cabina Color Gris.'
+            },
+            auto6: {
+                image: 'https://via.placeholder.com/150?text=Pickup',
+                description: 'Sedan Chevrolet Año 2021 Estandar, 4 Puertas Color Gris.'
+            }
+        };
+
+        document.getElementById('carType').addEventListener('change', function() {
+            const carType = this.value;
+            const carDetails = document.getElementById('carDetails');
+            const carImage = document.getElementById('carImage');
+            const carDescription = document.getElementById('carDescription');
+
+            if (carType && carData[carType]) {
+                carImage.src = carData[carType].image;
+                carDescription.textContent = carData[carType].description;
+                carImage.style.display = 'block';
+                carDetails.style.display = 'flex';
+            } else {
+                carImage.style.display = 'none';
+                carDetails.style.display = 'none';
+            }
+        });
+
+        document.getElementById('reservationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            //  datos del formulario
+            const carType = document.getElementById('carType').value;
+            const pickupDate = document.getElementById('pickupDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // resumen de la reserva
+            document.getElementById('summaryCarType').textContent = carData[carType]?.description || 'N/A';
+            document.getElementById('summaryPickupDate').textContent = pickupDate;
+            document.getElementById('summaryReturnDate').textContent = returnDate;
+            document.getElementById('summaryName').textContent = name;
+            document.getElementById('summaryEmail').textContent = email;
+            document.getElementById('summaryPhone').textContent = phone;
+
+            // el resumen
+            document.getElementById('summary').style.display = 'block';
+
+            // mensaje de confirmación
+            alert('¡Su reserva ha sido procesada con éxito!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    margin-bottom: 40px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    max-height: 60px; /* Ajusta la altura máxima para el logotipo */
+    width: auto; /* Mantiene la relación de aspecto del logotipo */
+    margin-right: 15px; /* Espacio entre el logo y el texto de la barra de navegación */
+}
+
+.navbar-nav .nav-link {
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffc107;
+}
+
+.contact-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.contact-card:hover {
+    background-color: #343a40;
+    color: #ffc107;
+    transform: scale(1.05);
+}
+
+.contact-card i {
+    font-size: 2.5rem;
+}
+
+.contact-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-card p {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: #343a40;
+    color: #adb5bd;
+}

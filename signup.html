@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - Reserva de Autos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Tu archivo CSS personalizado -->
+    <style>
+        .password-requirements {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .password-strength {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <nav class="navbar navbar-light mb-4">
+                            <a class="navbar-brand mx-auto" href="#">
+                                <img src="IMG-20240807-WA0020(1).jpg" alt="Logo" class="navbar-logo rounded-circle" height="70px">
+                            </a>
+                        </nav>
+                        <h3 class="text-center mb-4">Crear Cuenta</h3>
+                        <form id="signup-form">
+                            <div class="form-group">
+                                <label for="new-email">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="new-email" placeholder="Introduce tu correo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Contraseña</label>
+                                <input type="password" class="form-control" id="new-password" placeholder="Introduce tu contraseña" required>
+                                <small class="password-requirements">
+                                    La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, un número y un carácter especial.
+                                </small>
+                                <div id="password-strength" class="password-strength"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="confirm-password" placeholder="Confirma tu contraseña" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Fecha de Nacimiento</label>
+                                <input type="date" class="form-control" id="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Número de Teléfono</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Introduce tu número de teléfono" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Género</label>
+                                <select class="form-control" id="gender">
+                                    <option value="">Selecciona tu género (opcional)</option>
+                                    <option value="male">Masculino</option>
+                                    <option value="female">Femenino</option>
+                                    <option value="other">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="terms" required>
+                                <label class="form-check-label" for="terms">Acepto los <a href="terms.html">términos y condiciones</a> y la <a href="privacy.html">política de privacidad</a></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Crear Cuenta</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="login.html" class="text-secondary">Ya tengo una cuenta</a>
+                            
+                        </div>
+                        <div class="text-center mt-3">
+                         
+                            <a href="index.html" class="text-secondary">Volver a la página principal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript para validación de contraseñas
+        document.getElementById('new-password').addEventListener('input', function() {
+            var password = this.value;
+            var strengthText = document.getElementById('password-strength');
+            var strength = 'Débil';
+            var color = 'red';
+            
+            if (password.length >= 8) {
+                strength = 'Mediana';
+                color = 'orange';
+                
+                if (/[A-Z]/.test(password) && /\d/.test(password) && /[!@#$%^&*()_+{}\[\]:;"'<>,.?/\\|`~]/.test(password)) {
+                    strength = 'Fuerte';
+                    color = 'green';
+                }
+            }
+            
+            strengthText.textContent = 'Fortaleza de la contraseña: ' + strength;
+            strengthText.style.color = color;
+        });
+
+        // Validación de coincidencia de contraseñas
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            var password = document.getElementById('new-password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var termsAccepted = document.getElementById('terms').checked;
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                event.preventDefault();
+            }
+            
+            if (!termsAccepted) {
+                alert('Debes aceptar los términos y condiciones.');
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
